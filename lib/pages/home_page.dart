@@ -1,8 +1,10 @@
 // import 'dart:convert';
 
 import 'package:acyuta/listcard/temp.dart';
+import 'package:acyuta/pages/forecast.dart';
 // import 'package:acyuta/location/geolocation.dart';
 import 'package:acyuta/pages/upload.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 // import 'package:http/http.dart' as http;
@@ -38,7 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
     final size = MediaQuery.of(context).size;
     return  Scaffold(
           backgroundColor: const Color.fromARGB(255, 68, 121, 96),
-          appBar: AppBar(
+          appBar: AppBar(leading: const BackButton(color: Colors.black,),
             backgroundColor: Colors.greenAccent,
             title: const Text(
               "अच्युता",
@@ -55,11 +57,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 SizedBox(
                   height: size.height * 0.3,
                   width: double.infinity,
-                  child: Card(
+                  child: Card(shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
                     color: const Color.fromARGB(255, 174, 248, 212),
                     child: Image.asset(
-                      "assets/acyuta1.jpg",
-                      fit: BoxFit.fill,
+                      "assets/1.png",
+                      fit: BoxFit.cover,
                     ),
                   ),
                 ),
@@ -133,10 +135,12 @@ class _HomeScreenState extends State<HomeScreen> {
                 const SizedBox(
                   height: 10,
                 ),
-                const SizedBox(
-                  // height: size.height * 0.1,
-                  width: double.infinity,
-                  child: Temp(),
+                GestureDetector(onTap: () => Navigator.of(context).pushReplacement(CupertinoPageRoute(builder: (context)=>const ForeCast())),
+                  child: const SizedBox(
+                    // height: size.height * 0.1,
+                    width: double.infinity,
+                    child: Temp(),
+                  ),
                 ),
                 const SizedBox(
                   height: 10,

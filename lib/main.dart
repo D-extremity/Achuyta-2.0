@@ -1,5 +1,6 @@
 // import 'package:acyuta/pages/home_page.dart';
 // import 'package:acyuta/pages/loginpage.dart';
+// import 'package:acyuta/pages/forecast.dart';
 import 'package:acyuta/pages/loginpage.dart';
 // import 'package:acyute/pages/loginpage.dart';
 // import 'package:acyuta/pages/manualinput.dart';
@@ -37,6 +38,8 @@ class MyApp extends StatelessWidget {
       
       debugShowCheckedModeBanner: false,
       home: const LoginPage(),
+
+      // home: const ForeCast()
     );
   }
 }

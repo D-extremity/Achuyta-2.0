@@ -1,10 +1,9 @@
-// import 'package:geocode/geocode.dart';
 
 
 
 
 
-
+//! Getting location
 
 import 'package:location/location.dart';
 
@@ -12,7 +11,6 @@ Location location = Location();
 late bool _serviceEnabled;
 late PermissionStatus _permissionGranted;
 late LocationData locationData;
-
 Future<dynamic> getLocation() async {
   _serviceEnabled = await location.serviceEnabled();
   if (!_serviceEnabled) {
@@ -33,3 +31,6 @@ Future<dynamic> getLocation() async {
   locationData = await location.getLocation();
  
 }
+
+
+

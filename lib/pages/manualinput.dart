@@ -27,7 +27,7 @@ class _ManualInputState extends State<ManualInput> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: const Color.fromARGB(255, 154, 231, 194),
-        appBar: AppBar(
+        appBar: AppBar(leading: const BackButton(color: Colors.black,),
           actions: [
             IconButton(
               onPressed: () {
