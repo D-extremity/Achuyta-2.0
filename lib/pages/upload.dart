@@ -17,7 +17,7 @@ class _UploadState extends State<Upload> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 68, 121, 96),
-      appBar: AppBar(
+      appBar: AppBar(leading: const BackButton(color: Colors.black,),
         backgroundColor: Colors.greenAccent,
         title: const Text(
           "अच्युता",

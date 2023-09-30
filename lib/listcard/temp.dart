@@ -22,7 +22,7 @@ Future getWeather() async {
   // }
   address = await placemarkFromCoordinates(latitude!, longitude!);
 
-  print(address[0].street);
+  // print(address[0].street);
   final result = await http.get(
     Uri.parse(
       "https://api.open-meteo.com/v1/forecast?latitude=$latitude&longitude=$longitude&daily=temperature_2m_max,temperature_2m_min,sunrise,sunset,precipitation_sum,snowfall_sum,precipitation_hours,windspeed_10m_max&timezone=auto&forecast_days=16",
@@ -57,7 +57,9 @@ class _TempState extends State<Temp> {
         }
         final data = snapshot.data;
         // ignore: prefer_interpolation_to_compose_strings
-        final todayTemp = "${"${address[0].subLocality}"+" "+data['daily']['time'][0]} : ${data['daily']['temperature_2m_max'][0]} C";
+        final todayTemp =
+            "${data['daily']['time'][0]} : ${data['daily']['temperature_2m_max'][0]} C";
+        final add = "${address[0].subLocality}";
         return Card(
           color: const Color.fromARGB(255, 174, 248, 212),
           child: Column(
@@ -66,12 +68,17 @@ class _TempState extends State<Temp> {
                 height: 10,
               ),
               Text(
+                add,
+                softWrap: true,
+                style: titleStyle,
+              ),
+              Text(
                 todayTemp,
                 softWrap: true,
                 style: titleStyle,
               ),
               const Text(
-                "मौसम रिपोर्ट की जाँच करें",
+                "मौसम रिपोर्ट की जाँच करें 🔍",
                 style: titleStyle,
                 softWrap: true,
               )
