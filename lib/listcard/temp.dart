@@ -20,8 +20,7 @@ Future getWeather() async {
   // if (latitude == null || longitude == null) {
   //   return "Could not get loction";
   // }
-  address = await placemarkFromCoordinates(latitude!, longitude!,
-      localeIdentifier: "en_IN");
+  address = await placemarkFromCoordinates(latitude!, longitude!);
 
   print(address[0].street);
   final result = await http.get(
@@ -58,8 +57,7 @@ class _TempState extends State<Temp> {
         }
         final data = snapshot.data;
         // ignore: prefer_interpolation_to_compose_strings
-        final todayTemp = "${"${address[1].street}" +
-            data['daily']['time'][0]} : ${data['daily']['temperature_2m_max'][0]} C";
+        final todayTemp = "${"${address[0].subLocality}"+" "+data['daily']['time'][0]} : ${data['daily']['temperature_2m_max'][0]} C";
         return Card(
           color: const Color.fromARGB(255, 174, 248, 212),
           child: Column(
