@@ -1,5 +1,7 @@
 import 'dart:ui';
 
+import 'package:acyuta/card/weathercard.dart';
+import 'package:acyuta/listcard/temp.dart';
 import 'package:flutter/material.dart';
 
 class ForeCast extends StatefulWidget {
@@ -14,7 +16,10 @@ class _ForeCastState extends State<ForeCast> {
   Widget build(BuildContext context) {
     return SafeArea(
         child: Scaffold(
-      appBar: AppBar(leading: const BackButton(color: Colors.black,),
+      appBar: AppBar(
+        leading: const BackButton(
+          color: Colors.black,
+        ),
         backgroundColor: Colors.greenAccent,
         title: const Text(
           "अच्युता-मौसम पूर्वानुमान",
@@ -28,18 +33,62 @@ class _ForeCastState extends State<ForeCast> {
         fit: StackFit.loose,
         children: [
           BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 10,sigmaY: 10),
+            filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
             child: Image.asset(
               "assets/background.jpg",
               width: double.infinity,
               height: double.infinity,
               fit: BoxFit.cover,
               colorBlendMode: BlendMode.luminosity,
-              
             ),
-          )
+          ),
+          FutureBuilder(
+              future: getWeather(),
+              builder: (context, AsyncSnapshot<dynamic> snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Card(
+                    color: Colors.greenAccent,
+                    child: Center(
+                      // widthFactor: 30,
+                      // heightFactor: 30,
+                      child: Column(
+                        children: [
+                          CircularProgressIndicator(
+                            strokeAlign: BorderSide.strokeAlignCenter,
+                            semanticsValue: "Internet Required Loading..",
+                            semanticsLabel: "Internet Required Loading..",
+                            color: Colors.black,
+                          ),
+                          Text("Internet is required ..loading..")
+                        ],
+                      ),
+                    ),
+                  );
+                }
+
+                final data = snapshot.data!;
+                return ListView.builder(
+                    itemCount: 14,
+                    itemBuilder: ((context, index) {
+                      return WeatherCard(
+                          date: data['daily']['time'][index].toString(),
+                          maxTemp: data['daily']["temperature_2m_max"][index].toString(),
+                          minTemp: data['daily']['temperature_2m_min'][index].toString(),
+                          rain: data['daily']['precipitation_sum'][index].toString(),
+                          sunrise: data['daily']['sunrise'][index].toString().substring(11),
+                          sunset: data['daily']['sunset'][index].toString().substring(11));
+                    }));
+              }),
         ],
       ),
     ));
   }
 }
+
+
+// date: data['daily']['time'][index].toString(),
+//                           maxTemp: data['daily']["temperature_2m_max"][index].toString(),
+//                           minTemp: data['daily']['temperature_2m_min'][index].toString(),
+//                           rain: data['daily']['precipitation'][index].toString(),
+//                           sunrise: data['daily']['sunrise'][index].toString(),
+//                           sunset: data['daily']['sunset'][index].toString()
