@@ -21,10 +21,10 @@ class _ForeCastState extends State<ForeCast> {
           color: Colors.black,
         ),
         backgroundColor: Colors.greenAccent,
-        title: const Text(
-          "अच्युता-मौसम पूर्वानुमान",
+        title: Text(
+          "अच्युता-मौसम पूर्वानुमान\n${address[0].subLocality}",
           softWrap: true,
-          style: TextStyle(
+          style: const TextStyle(
               color: Colors.black, fontSize: 22, fontWeight: FontWeight.w500),
         ),
         centerTitle: true,
@@ -59,7 +59,7 @@ class _ForeCastState extends State<ForeCast> {
                             semanticsLabel: "Internet Required Loading..",
                             color: Colors.black,
                           ),
-                          Text("Internet is required ..loading..")
+                          Text("Internet is required ..loading..",style: TextStyle(color: Colors.black),)
                         ],
                       ),
                     ),
@@ -72,11 +72,18 @@ class _ForeCastState extends State<ForeCast> {
                     itemBuilder: ((context, index) {
                       return WeatherCard(
                           date: data['daily']['time'][index].toString(),
-                          maxTemp: data['daily']["temperature_2m_max"][index].toString(),
-                          minTemp: data['daily']['temperature_2m_min'][index].toString(),
-                          rain: data['daily']['precipitation_sum'][index].toString(),
-                          sunrise: data['daily']['sunrise'][index].toString().substring(11),
-                          sunset: data['daily']['sunset'][index].toString().substring(11));
+                          maxTemp: data['daily']["temperature_2m_max"][index]
+                              .toString(),
+                          minTemp: data['daily']['temperature_2m_min'][index]
+                              .toString(),
+                          rain: data['daily']['precipitation_sum'][index]
+                              .toString(),
+                          sunrise: data['daily']['sunrise'][index]
+                              .toString()
+                              .substring(11),
+                          sunset: data['daily']['sunset'][index]
+                              .toString()
+                              .substring(11));
                     }));
               }),
         ],

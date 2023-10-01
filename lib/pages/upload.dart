@@ -1,6 +1,11 @@
 // import 'package:acyuta/pages/manualinput.dart';
+import 'dart:typed_data';
+
+import 'package:acyuta/getimage/getimage.dart';
 import 'package:acyuta/pages/manualinput.dart';
+import 'package:acyuta/pages/shcdetail.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
 class Upload extends StatefulWidget {
   const Upload({super.key});
@@ -9,6 +14,8 @@ class Upload extends StatefulWidget {
   State<Upload> createState() => _UploadState();
 }
 
+late Uint8List uploadedimage;
+bool found = false;
 const titleStyle =
     TextStyle(fontWeight: FontWeight.w600, color: Colors.black, fontSize: 20);
 
@@ -17,7 +24,10 @@ class _UploadState extends State<Upload> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 68, 121, 96),
-      appBar: AppBar(leading: const BackButton(color: Colors.black,),
+      appBar: AppBar(
+        leading: const BackButton(
+          color: Colors.black,
+        ),
         backgroundColor: Colors.greenAccent,
         title: const Text(
           "अच्युता",
@@ -30,28 +40,191 @@ class _UploadState extends State<Upload> {
           const SizedBox(
             height: 20,
           ),
-          Image.asset("assets/uploadimage.png"),
+          GestureDetector(
+              onTap: () {
+                showDialog(
+                  context: context,
+                  builder: (context) {
+                    return AlertDialog(
+                      backgroundColor: Colors.greenAccent,
+                      icon: Image.asset("assets/farmericon.png"),
+                      title: const Text(
+                        "मृदा स्वास्थ्य कार्ड अपलोड करने के लिए कृपया एक विकल्प चुनें",
+                        style: TextStyle(color: Colors.black),
+                      ),
+                      actions: [
+                        IconButton(
+                            //!
+                            onPressed: () async {
+                              final image = await pickImage(ImageSource.camera);
+                              if (image == null) {
+                                // ignore: use_build_context_synchronously
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                        content: Text(
+                                            "No image found (कोई चित्र नहीं मिला)")));
+                              }
+
+                              setState(() {
+                                uploadedimage = image;
+                                found = true;
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) => const ShcDetail()));
+                              });
+                            },
+                            icon: const Icon(
+                              Icons.camera_alt_outlined,
+                              size: 50,
+                              color: Colors.black,
+                            )),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        //!
+                        IconButton(
+                            onPressed: () async {
+                              final image =
+                                  await pickImage(ImageSource.gallery);
+                              if (image == null) {
+                                // ignore: use_build_context_synchronously
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                        content: Text(
+                                            "No image found (कोई चित्र नहीं मिला)")));
+                              }
+
+                              setState(() {
+                                uploadedimage = image;
+                                found = true;
+                                Navigator.of(context).push(MaterialPageRoute(
+                                    builder: (context) => const ShcDetail()));
+                              });
+                            },
+                            icon: const Icon(
+                              Icons.file_copy_outlined,
+                              size: 50,
+                              color: Colors.black,
+                            )),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        TextButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            child: const Text(
+                              "रद्द करें",
+                              style: TextStyle(color: Colors.red),
+                            )),
+                      ],
+                    );
+                  },
+                );
+              },
+              child: Image.asset("assets/uploadimage.png")),
           const SizedBox(
             height: 30,
           ),
-          const Card(color: Colors.greenAccent,
-            child: Column(
-              children: [
-                Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Text(
-                    "Upload Your Soil Health Card",
-                    style: titleStyle,
+          GestureDetector(
+            onTap: () {
+              showDialog(
+                context: context,
+                builder: (context) {
+                  return AlertDialog(
+                    backgroundColor: Colors.greenAccent,
+                    icon: Image.asset("assets/farmericon.png"),
+                    title: const Text(
+                      "मृदा स्वास्थ्य कार्ड अपलोड करने के लिए कृपया एक विकल्प चुनें",
+                      style: TextStyle(color: Colors.black),
+                    ),
+                    actions: [
+                      IconButton(
+                          //!
+                          onPressed: () async {
+                            final image = await pickImage(ImageSource.camera);
+                            if (image == null) {
+                              // ignore: use_build_context_synchronously
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                      content: Text(
+                                          "No image found (कोई चित्र नहीं मिला)")));
+                            }
+
+                            setState(() {
+                              uploadedimage = image;
+                              found = true;
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => const ShcDetail()));
+                            });
+                          },
+                          icon: const Icon(
+                            Icons.camera_alt_outlined,
+                            size: 50,
+                            color: Colors.black,
+                          )),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      //!
+                      IconButton(
+                          onPressed: () async {
+                            final image = await pickImage(ImageSource.gallery);
+                            if (image == null) {
+                              // ignore: use_build_context_synchronously
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                      content: Text(
+                                          "No image found (कोई चित्र नहीं मिला)")));
+                            }
+
+                            setState(() {
+                              uploadedimage = image;
+                              found = true;
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => const ShcDetail()));
+                            });
+                          },
+                          icon: const Icon(
+                            Icons.file_copy_outlined,
+                            size: 50,
+                            color: Colors.black,
+                          )),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          child: const Text(
+                            "रद्द करें",
+                            style: TextStyle(color: Colors.red),
+                          )),
+                    ],
+                  );
+                },
+              );
+            },
+            child: const Card(
+              color: Colors.greenAccent,
+              child: Column(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Text(
+                      "Upload Your Soil Health Card",
+                      style: titleStyle,
+                    ),
                   ),
-                ),
-                Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Text(
-                    "अपना मृदा स्वास्थ्य कार्ड अपलोड करें",
-                    style: titleStyle,
+                  Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Text(
+                      "अपना मृदा स्वास्थ्य कार्ड अपलोड करें",
+                      style: titleStyle,
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
           const SizedBox(

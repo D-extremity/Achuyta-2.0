@@ -38,12 +38,12 @@ class WeatherCard extends StatelessWidget {
               "अधिकतम तापमान: $maxTemp C  \nन्यूनतम तापमान: $minTemp C",
               style: const TextStyle(
                   color: Colors.black,
-                  fontSize: 25,
+                  fontSize: 20,
                   fontWeight: FontWeight.w500),
             ),
             subtitle: Text(
               "सूर्योदय: $sunrise AM\nसूर्यास्त: $sunset PM \nबारिश: $rain \nदिनांक: $date",
-              style: const TextStyle(color: Colors.black, fontSize: 25),
+              style: const TextStyle(color: Colors.black, fontSize: 15),
             ),
           ),
         ),
