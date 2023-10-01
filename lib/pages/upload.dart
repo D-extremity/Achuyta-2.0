@@ -4,6 +4,7 @@ import 'dart:typed_data';
 import 'package:acyuta/getimage/getimage.dart';
 import 'package:acyuta/pages/manualinput.dart';
 import 'package:acyuta/pages/shcdetail.dart';
+import 'package:acyuta/textrecog/textrecog.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
