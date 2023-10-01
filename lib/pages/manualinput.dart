@@ -10,7 +10,7 @@ class ManualInput extends StatefulWidget {
   State<ManualInput> createState() => _ManualInputState();
 }
 
-dynamic resultList;
+
 
 final TextEditingController _getPh = TextEditingController();
 final TextEditingController _getN = TextEditingController();
@@ -31,7 +31,7 @@ class _ManualInputState extends State<ManualInput> {
           actions: [
             IconButton(
               onPressed: () {
-                resultList = resultOut(
+              List  resultList = resultOut(
                     boronInput: double.parse(_getB.text),
                     ironInput: double.parse(_getIr.text),
                     nitrogenInput: double.parse(_getN.text),
@@ -41,7 +41,7 @@ class _ManualInputState extends State<ManualInput> {
                     phosInput: double.parse(_getPhos.text),
                     potasInput: double.parse(_getpotassium.text));
                 Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => const Preferences()));
+                    builder: (context) =>  Preferences(resultList:resultList)));
               },
               icon: const Icon(
                 Icons.upload,

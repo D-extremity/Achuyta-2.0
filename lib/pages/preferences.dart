@@ -1,9 +1,11 @@
 import 'package:acyuta/card/crop.dart';
-import 'package:acyuta/pages/manualinput.dart';
+// import 'package:acyuta/pages/manualinput.dart';
+// import 'package:acyuta/pages/shcdetail.dart';
 import 'package:flutter/material.dart';
 
 class Preferences extends StatefulWidget {
-  const Preferences({super.key});
+  final List resultList;
+  const Preferences({super.key,required this.resultList});
 
   @override
   State<Preferences> createState() => _PreferencesState();
@@ -13,14 +15,14 @@ Map<String, String> imagePreference = {
   "bajra": "assets/bajra.jpg",
   "urad": "assets/urad.jpeg",
   "wheat": "assets/wheat.jpg",
-  "mustard":"assets/mustardfinal.jpg",
+  "mustard": "assets/mustardfinal.jpg",
   "rice": "assets/rice.jpg",
-  "maize":"assets/cornmaize.jpg",
+  "maize": "assets/cornmaize.jpg",
   "tomato": "assets/tomato.jpg",
   "jowar": "assets/jowar.jpg",
-  "sugarcane":"assets/sc.jpg",
+  "sugarcane": "assets/sc.jpg",
   "potato": "assets/potato.jpg",
-  "null":"assets/null.png"
+  "null": "assets/null.png"
 };
 
 class _PreferencesState extends State<Preferences> {
@@ -28,9 +30,11 @@ class _PreferencesState extends State<Preferences> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 68, 121, 96),
-      appBar: AppBar(leading: const BackButton(color: Colors.black,),
+      appBar: AppBar(
+        leading: const BackButton(
+          color: Colors.black,
+        ),
         backgroundColor: Colors.greenAccent,
-        
         title: const Text(
           "अच्युता-विश्लेषण के अनुसार,\nफसलों की प्राथमिकता",
           softWrap: true,
@@ -40,12 +44,11 @@ class _PreferencesState extends State<Preferences> {
         centerTitle: true,
       ),
       body: ListView.builder(
-          itemCount: resultList.length,
+          itemCount: widget.resultList.length,
           itemBuilder: (context, index) {
             return CardCrop(
-              cropName: resultList[index],
-              cropImage:imagePreference[resultList[index]].toString()
-            );
+                cropName: widget.resultList[index],
+                cropImage: imagePreference[widget.resultList[index]].toString());
           }),
     );
   }
