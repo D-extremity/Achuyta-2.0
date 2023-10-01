@@ -66,5 +66,4 @@ flutter {
 }
 
 dependencies {
-    implementation 'com.google.mlkit:text-recognition-devanagari:16.0.0-beta6'
 }
