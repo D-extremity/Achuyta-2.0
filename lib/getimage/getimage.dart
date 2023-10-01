@@ -7,7 +7,7 @@ pickImage(ImageSource source) async {
   final XFile? image = await picker.pickImage(source: source);
   if (image != null) {
     finalImage = image;
-    getRecognisedText(finalImage!);
+    await getRecognisedText(finalImage!);
     return await image.readAsBytes();
   }
 }

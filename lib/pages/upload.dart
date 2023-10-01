@@ -48,10 +48,15 @@ class _UploadState extends State<Upload> {
                   builder: (context) {
                     return AlertDialog(
                       backgroundColor: Colors.greenAccent,
-                      icon: Image.asset("assets/farmericon.png"),
+                      icon: Image.asset("assets/infor.jpg"),
                       title: const Text(
-                        "मृदा स्वास्थ्य कार्ड अपलोड करने के लिए कृपया एक विकल्प चुनें",
+                        "मृदा स्वास्थ्य कार्ड अपलोड करने के लिए कृपया एक विकल्प चुनें ",
                         style: TextStyle(color: Colors.black),
+                      ),
+                      content: const Text(
+                        "कृपया सुनिश्चित करें कि आपके द्वारा अपलोड किया गया फोटो ठीक से ज़ूम या क्रॉप किया जाना चाहिए ताकि केवल ये मान चित्र में हों या कम से कम मानों के बाईं ओर कुछ भी नहीं होना चाहिए|\nPlease make ensure the photo you upload should be zoomed or cropped properly so that only these values should be in the picture or atleast nothing should be on left side of the values .",
+                        style: TextStyle(
+                            color: Colors.red, fontWeight: FontWeight.w600),
                       ),
                       actions: [
                         IconButton(

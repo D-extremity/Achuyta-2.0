@@ -6,18 +6,18 @@
 import 'package:google_mlkit_text_recognition/google_mlkit_text_recognition.dart';
 import 'package:image_picker/image_picker.dart';
 
-late final double nitrogenfromCard;
-late final double phfromCard;
-late final double phosphorusfromCard;
-late final double potassiumfromCard;
-late final double sulphurfromCard;
-late final double zincfromCard;
-late final double boronfromCard;
-late final double ironfromCard;
-late final double manganesefromCard;
-late final double copperfromCard;
+ double nitrogenfromCard=0;
+ double phfromCard=0;
+ double phosphorusfromCard=0;
+ double potassiumfromCard=0;
+ double sulphurfromCard=0;
+ double zincfromCard=0;
+ double boronfromCard=0;
+ double ironfromCard=0;
+ double manganesefromCard=0;
+ double copperfromCard=0;
 
-void getRecognisedText(XFile finalImage) async {
+Future<void> getRecognisedText(XFile finalImage) async {
   final textRecognizer = TextRecognizer(script: TextRecognitionScript.latin);
   final RecognizedText recognizedText = await textRecognizer
       .processImage(InputImage.fromFilePath(finalImage.path));
