@@ -1,3 +1,4 @@
+import 'package:acyuta/textrecog/textrecog.dart';
 import 'package:image_picker/image_picker.dart';
 
 XFile? finalImage;
@@ -6,6 +7,7 @@ pickImage(ImageSource source) async {
   final XFile? image = await picker.pickImage(source: source);
   if (image != null) {
     finalImage = image;
+    await getRecognisedText(finalImage!);
     return await image.readAsBytes();
   }
 }
